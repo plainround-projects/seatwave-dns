@@ -1,0 +1,5 @@
+# Weights for book.seatwave.example, in the format of CoreDNS's loadbalance weighted policy.
+# Equal weights: each site is first in about half of the answers.
+book.seatwave.example
+192.0.2.10 50
+198.51.100.20 50

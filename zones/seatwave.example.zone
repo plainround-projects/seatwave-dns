@@ -1,0 +1,20 @@
+; SeatWave's own zone: the only part of the name space SeatWave owns (Module 6, Section 8).
+; Every address is from a range reserved for documentation (RFC 5737, RFC 3849) except the lab
+; name server's, which is the loopback address the lab server listens on.
+$ORIGIN seatwave.example.
+$TTL 3600
+; SOA timers: refresh 2 h, retry 15 min, expire 14 days; the last field, 300 s, is how long a "no such name" may be cached.
+@      3600 IN SOA   ns1.seatwave.example. hostmaster.seatwave.example. 2026111001 7200 900 1209600 300
+@      3600 IN NS    ns1.seatwave.example.
+ns1    3600 IN A     127.0.0.1
+; SIMPLE: one A record with a one-hour TTL pointing at the single SeatWave machine.
+@      3600 IN A     192.0.2.10
+@      3600 IN AAAA  2001:db8::10
+@      3600 IN TXT   "seatwave-lab: documentation addresses only"
+www    3600 IN CNAME seatwave.example.
+; The two SeatWave instances, one per site.
+site1  3600 IN A     192.0.2.10
+site2  3600 IN A     198.51.100.20
+; The weighted pair: both sites under one name, with a short TTL; the weights file picks the first.
+book   60   IN A     192.0.2.10
+book   60   IN A     198.51.100.20

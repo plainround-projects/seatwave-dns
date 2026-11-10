@@ -1,0 +1,7 @@
+; The live TTL-change run (Module 6, Sections 8 and 11): the same apex record as the main zone,
+; with a 10-second TTL so the whole migration happens in about a minute.
+$ORIGIN seatwave.example.
+@      10 IN SOA   ns1.seatwave.example. hostmaster.seatwave.example. 2026111001 7200 900 1209600 5
+@      10 IN NS    ns1.seatwave.example.
+ns1    10 IN A     127.0.0.1
+@      10 IN A     192.0.2.10

@@ -1,0 +1,11 @@
+; A broken copy of SeatWave's zone for failure mode 3. Each mistake is one a real change can make.
+$ORIGIN seatwave.example.
+$TTL 3600
+@      3600 IN SOA   ns1.seatwave.example. hostmaster.seatwave.example. 2026111002 7200 900 1209600 300
+; Mistake 1: the name server's address (glue) was deleted with an "unused" record.
+@      3600 IN NS    ns1.seatwave.example.
+; Mistake 2: the apex was turned into an alias of a hosting name.
+@      3600 IN CNAME seatwave-prod.hosting.example.
+; Mistake 3: one record of the pair was edited with a new TTL.
+book   60   IN A     192.0.2.10
+book   300  IN A     198.51.100.20

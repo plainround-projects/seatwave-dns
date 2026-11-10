@@ -1,0 +1,30 @@
+# CoreDNS serving the same three lab zones as the Java server, each on its own port (Module 6,
+# Section 8). The zone and weight files are the project's own, mounted read-only at /zones.
+# Checked against the CoreDNS plugin documentation (file, loadbalance, log, errors) on 10 November 2026.
+
+# The lab's stand-in for the root zone.
+.:5301 {
+    file /zones/root.zone .
+    log
+    errors
+}
+
+# The lab's stand-in for the example. top-level domain.
+example.:5302 {
+    file /zones/example.zone example.
+    log
+    errors
+}
+
+# SeatWave's own zone, with the weighted pair: the weights file uses CoreDNS's own format.
+# reload 10s re-reads a zone whose SOA serial went up, which is how a change is published here.
+seatwave.example.:5303 {
+    file /zones/seatwave.example.zone seatwave.example. {
+        reload 10s
+    }
+    loadbalance weighted /zones/seatwave.example.weights {
+        reload 10s
+    }
+    log
+    errors
+}

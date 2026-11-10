@@ -1,0 +1,4 @@
+# Mistake 4: the weight still names the address of a site that was removed.
+book.seatwave.example
+192.0.2.10 90
+203.0.113.99 10

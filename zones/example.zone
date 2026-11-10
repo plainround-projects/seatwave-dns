@@ -1,0 +1,9 @@
+; The lab's stand-in for a top-level domain. It delegates seatwave.example to SeatWave's own
+; name server and carries its address as glue, because that name server lives inside the zone it serves.
+$ORIGIN example.
+$TTL 86400
+@              86400  IN SOA   a.tld-lab.example. hostmaster.tld-lab.example. 2026111001 1800 900 604800 3600
+@              172800 IN NS    a.tld-lab.example.
+a.tld-lab      172800 IN A     127.0.0.1
+seatwave       172800 IN NS    ns1.seatwave.example.
+ns1.seatwave   172800 IN A     127.0.0.1

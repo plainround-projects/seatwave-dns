@@ -1,0 +1,10 @@
+; The lab's stand-in for the root zone. It delegates only "example." (reserved for documentation,
+; RFC 2606), and every name server address is 127.0.0.1, so no query ever leaves this machine.
+; The TTLs copy the ones the real root zone uses for its own NS set (518400) and a delegation (172800).
+$ORIGIN .
+$TTL 86400
+@                    86400  IN SOA   a.root-lab.example. hostmaster.root-lab.example. 2026111001 1800 900 604800 86400
+@                    518400 IN NS    a.root-lab.example.
+a.root-lab.example.  518400 IN A     127.0.0.1
+example.             172800 IN NS    a.tld-lab.example.
+a.tld-lab.example.   172800 IN A     127.0.0.1

@@ -1,0 +1,20 @@
+# Optional: the production-like layer. CoreDNS serves the same zone files as the Java lab server,
+# on the same three ports, bound to 127.0.0.1 only, so dig and the sampler can be pointed at it.
+# The image tag and its digest were checked on Docker Hub on 10 November 2026 (CoreDNS 1.15.0,
+# released 21 October 2026). Start it with: docker compose up
+services:
+  coredns:
+    image: coredns/coredns:1.15.0@sha256:0a9d8c8ddf34347eb59aad9a8784f0710de88d6d112726d11d271f9bc6daca26
+    command: ["-conf", "/etc/coredns/Corefile"]
+    volumes:
+      - ./coredns/Corefile:/etc/coredns/Corefile:ro
+      - ./zones:/zones:ro
+    ports:
+      - "127.0.0.1:5301:5301/udp"
+      - "127.0.0.1:5302:5302/udp"
+      - "127.0.0.1:5303:5303/udp"
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
