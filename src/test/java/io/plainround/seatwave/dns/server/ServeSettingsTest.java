@@ -54,6 +54,19 @@ class ServeSettingsTest {
             "listener.tld.zone.file is missing");
   }
 
+  @Test
+  void refusesTwoListenersOnOnePort() throws Exception {
+    Properties properties = SettingsReader.load(Path.of("config/serve.properties"));
+    properties.setProperty("listener.tld.port", String.valueOf(ROOT_PORT));
+
+    List<String> problems =
+        ((Result.Error<ServeSettings, List<String>>)
+                ServeSettings.from(new SettingsReader(properties)))
+            .error();
+
+    assertThat(problems).containsExactly("two listeners share a port");
+  }
+
   private static Result<ServeSettings, List<String>> read(String file) throws Exception {
     return ServeSettings.from(new SettingsReader(SettingsReader.load(Path.of(file))));
   }

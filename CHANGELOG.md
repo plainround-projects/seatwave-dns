@@ -4,6 +4,21 @@ All notable changes to this project are written here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [1.1.0] - 2026-11-11
+
+### Added
+
+- `tech/`: 30 beginner notes, one per technology, with line-by-line walkthroughs of the main code,
+  the tests, the build files and the scripts, and an index with a reading order.
+
+### Fixed
+
+- `ServeSettings.from` reports two listeners on one port as a settings problem; before, the
+  program stopped with a stack trace.
+- `DnsClient` names the port when nothing is listening; before, the message ended in "null".
+- `scripts/ttl-change.sh` refuses a port or a count with a leading zero, which Bash would have
+  read as an octal number.
+
 ## [1.0.0] - 2026-11-10
 
 ### Added

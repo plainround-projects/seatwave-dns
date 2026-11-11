@@ -91,7 +91,9 @@ public final class DnsClient implements Upstream, AutoCloseable {
     } catch (SocketTimeoutException timedOut) {
       return Result.error(new LookupProblem.TimedOut(timeout));
     } catch (PortUnreachableException closedPort) {
-      return Result.error(new LookupProblem.Unreachable(String.valueOf(closedPort.getMessage())));
+      // The exception carries no message of its own, so name the port that refused the packet.
+      return Result.error(
+          new LookupProblem.Unreachable("nothing is listening on port " + socket.getPort()));
     } catch (IOException failed) {
       throw new UncheckedIOException("the UDP socket failed", failed);
     }

@@ -72,6 +72,10 @@ public record ServeSettings(List<Listener> listeners, Duration serveFor, long ra
     }
     List<String> problems = new ArrayList<>(reader.problems());
     problems.addAll(zoneProblems);
+    // Checked here as well as in the constructor, so a person sees a settings problem, not a crash.
+    if (listeners.stream().map(Listener::port).distinct().count() != listeners.size()) {
+      problems.add("two listeners share a port");
+    }
     if (!problems.isEmpty()) {
       return Result.error(List.copyOf(problems));
     }

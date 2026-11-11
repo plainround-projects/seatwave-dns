@@ -43,10 +43,10 @@ done
 
 # Check before: the tool, the inputs and the output.
 command -v dig >/dev/null || { echo "dig is not installed" >&2; exit 1; }
-[[ "$port" =~ ^[0-9]+$ ]] && (( port >= LOWEST_PORT && port <= HIGHEST_PORT )) \
+[[ "$port" =~ ^[1-9][0-9]*$ ]] && (( port >= LOWEST_PORT && port <= HIGHEST_PORT )) \
   || { echo "the port must be $LOWEST_PORT to $HIGHEST_PORT" >&2; exit 2; }
 [[ "$name" =~ $NAME_PATTERN ]] || { echo "the name must lie under seatwave.example: $name" >&2; exit 2; }
-[[ "$seconds" =~ ^[0-9]+$ ]] && (( seconds >= 1 && seconds <= MAX_SECONDS )) \
+[[ "$seconds" =~ ^[1-9][0-9]*$ ]] && (( seconds >= 1 && seconds <= MAX_SECONDS )) \
   || { echo "seconds must be 1 to $MAX_SECONDS" >&2; exit 2; }
 [[ ! -e "$out_file" ]] || { echo "refusing to overwrite $out_file" >&2; exit 2; }
 

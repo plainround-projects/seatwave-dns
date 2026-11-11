@@ -335,6 +335,7 @@ zones/         the lab zones (root, example., seatwave.example, the live zone) a
 zones/broken/  a zone with four mistakes, for failure mode 3
 coredns/       the Corefile for the optional CoreDNS layer
 scripts/       ttl-change.sh: dig once per second, with a dry run, a confirmation and an audit line
+tech/          beginner notes: one file per technology, plus line-by-line walkthroughs
 src/main/java/io/plainround/seatwave/dns/
   config/      SettingsReader
   message/     DomainName, RecordType, ResponseCode, RecordData, ResourceRecord, Question, Message,
@@ -351,6 +352,10 @@ src/main/java/io/plainround/seatwave/dns/
 src/main/resources/META-INF/services/java.net.spi.InetAddressResolverProvider
 src/test/java/ the tests, one folder per package
 ```
+
+## Technology notes
+
+The `tech/` folder explains every technology this repository uses, from zero: Java, the DNS protocol, UDP and the JDK's resolver interface, Gradle and its wrapper scripts, Bash and the TTL script, `dig`, CoreDNS, the version catalog, dependency locking, the formatter, the coverage tool, the test libraries, zone files, properties files, Docker Compose, EditorConfig and Git. Eight more files walk through the main code and the tests line by line. Start at `tech/README.md`, which gives a reading order.
 
 ## What is simplified for teaching
 
